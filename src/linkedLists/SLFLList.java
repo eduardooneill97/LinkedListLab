@@ -7,6 +7,7 @@ package linkedLists;
  *
  */
 
+import java.lang.annotation.Inherited;
 import java.util.NoSuchElementException;
 
 import linkedLists.LinkedList;
@@ -21,7 +22,6 @@ public class SLFLList<E> extends SLList<E>
 		first = last = null; 
 		length = 0; 
 	}
-	
 	
 	public void addFirstNode(Node<E> nuevo) {
 		((SNode<E>) nuevo).setNext(first);
@@ -53,23 +53,27 @@ public class SLFLList<E> extends SLList<E>
 	}
 
 	public Node<E> getFirstNode() throws NoSuchElementException {
+		if(first == null)
+			throw new NoSuchElementException("getFirsttNode(): Empty list.");
 		return first;
 	}
 
 	public Node<E> getLastNode() throws NoSuchElementException {
+		if(last == null)
+			throw new NoSuchElementException("getLastNode(): Empty list.");
 		return last;
 	}
 
 	public Node<E> getNodeAfter(Node<E> target) throws NoSuchElementException {
 		if(target == last)
-			throw new NoSuchElementException("Target is the last node");
+			throw new NoSuchElementException("getNodeAfter(...): Target is the last node");
 		return ((SNode<E>)target).getNext();
 	}
 
 	public Node<E> getNodeBefore(Node<E> target)
 			throws NoSuchElementException {
 		if(target == first)
-			throw new NoSuchElementException("Target is the first node");
+			throw new NoSuchElementException("getNodeBefore(...): Target is the first node");
 		return findNodePrevTo(target);
 	}
 
